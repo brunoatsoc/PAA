@@ -1,22 +1,26 @@
 //Essa parte importa as classe que vamos usar no algoritmo
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 //Classe para o algoritmo de Prim
 public class PrimMST{
     private int sizeGraph; //guarda o tamanho da matriz de adjacência
     private int[] parent; //Vai armazenas a arvore geradora que vamos construir
     private int[][] graph; //Grafo
+    private String answerFile;
 
     //Construtor
-    public PrimMST(String nameFile) throws IOException{
+    public PrimMST(String nameFile, String answerFile) throws IOException{
         File file = new File(nameFile);
         Scanner scn = new Scanner(file);
 
         this.sizeGraph = scn.nextInt(); //Pega a primeira linha com o tamanho da matriz
         this.parent = new int[sizeGraph];
         this.graph = new int[sizeGraph][sizeGraph];
+        this.answerFile = answerFile;
 
         //Faz a leitura da matriz de adjacência
         for(int i = 0; i < sizeGraph; i++){
@@ -82,10 +86,20 @@ public class PrimMST{
 
     //Esse metodo vai imprimir a arvore geradora minima
     public void printMTS(){
-        System.out.printf("ADJACÊNCIA\tPESO\n");
+        //Escreve a matriz no arquivo
+        try{
+            PrintWriter fileout = new PrintWriter(new FileWriter(answerFile));
+            
+            fileout.printf("ADJACÊNCIA\tPESO\n");
 
-        for(int i = 1; i < sizeGraph; i++){
-            System.out.printf("%d -> %d \t\t %d\n", parent[i], i, graph[i][parent[i]]);
+            for(int i = 1; i < sizeGraph; i++){
+                fileout.printf("%d -> %d \t\t %d\n", parent[i], i, graph[i][parent[i]]);
+            }
+
+            fileout.close();
+            System.out.println("success...");
+        }catch(Exception e){
+            System.out.println(e);
         }
     }
 }//Fim classe PrimMST
