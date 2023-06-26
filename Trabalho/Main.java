@@ -1,5 +1,7 @@
 //Essa parte importa as classes que vamos precisar no algoritmo
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /*
  * Alunos: Vitor Coutinho, Bruno Santos Costa
@@ -85,12 +87,21 @@ public class Main{
         timeExecutionFinal[6] = System.currentTimeMillis();
 
         //Imprime os tempos de execução
-        System.out.printf("Time Execution: %d\n", timeExecutionFinal[0] - timeExecutionStart[0]);
-        System.out.printf("Time Execution: %d\n", timeExecutionFinal[1] - timeExecutionStart[1]);
-        System.out.printf("Time Execution: %d\n", timeExecutionFinal[2] - timeExecutionStart[2]);
-        System.out.printf("Time Execution: %d\n", timeExecutionFinal[3] - timeExecutionStart[3]);
-        System.out.printf("Time Execution: %d\n", timeExecutionFinal[4] - timeExecutionStart[4]);
-        System.out.printf("Time Execution: %d\n", timeExecutionFinal[5] - timeExecutionStart[5]);
-        System.out.printf("Time Execution: %d\n", timeExecutionFinal[6] - timeExecutionStart[6]);
+        try{
+            PrintWriter fileout = new PrintWriter(new FileWriter("Resposta/TimeExecution.txt"));
+
+            fileout.printf("Time Execution Graph1: %d\n", timeExecutionFinal[0] - timeExecutionStart[0]);
+            fileout.printf("Time Execution Graph2: %d\n", timeExecutionFinal[1] - timeExecutionStart[1]);
+            fileout.printf("Time Execution Graph3: %d\n", timeExecutionFinal[2] - timeExecutionStart[2]);
+            fileout.printf("Time Execution Graph4: %d\n", timeExecutionFinal[3] - timeExecutionStart[3]);
+            fileout.printf("Time Execution Graph5: %d\n", timeExecutionFinal[4] - timeExecutionStart[4]);
+            fileout.printf("Time Execution Graph6: %d\n", timeExecutionFinal[5] - timeExecutionStart[5]);
+            fileout.printf("Time Execution Graph7: %d\n", timeExecutionFinal[6] - timeExecutionStart[6]);
+
+            fileout.close();
+            System.out.println("success...");
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }//Fim main
 }//Fim main
